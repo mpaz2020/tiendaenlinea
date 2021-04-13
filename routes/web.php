@@ -5,17 +5,23 @@ use Illuminate\Support\Facades\Route;
 
 
 //==========================================rutas del cliente==========================================
+Route::post('/payments/pay', 'PaymentController@pay')->name('web.pay');
 
 Route::get('shop_grid', 'WebController@shop_grid')->name('web.shop_grid');
 //Route::get('product_details', 'WebController@product_details')->name('web.product_details');
-Route::get('my_account', 'WebController@my_account')->name('web.my_account');
+
 Route::get('login_register', 'WebController@login_register')->name('web.login_register');
 Route::get('contact_us', 'WebController@contact_us')->name('web.contact_us');
 //Route::get('cart', 'WebController@cart')->name('web.cart');
 Route::get('blog', 'WebController@blog')->name('web.blog');
 Route::get('blog_details', 'WebController@blog_details')->name('web.blog_details');
 Route::get('about_us', 'WebController@about_us')->name('web.about_us');
-Route::get('checkout', 'WebController@checkout')->name('web.checkout');
+
+
+Route::get('my_account', 'MyAccountController@my_account')->name('web.my_account');
+Route::get('checkout', 'MyAccountController@checkout')->name('web.checkout');
+
+
 Route::get('/', 'WebController@welcome')->name('web.welcome');
 
 
@@ -75,7 +81,7 @@ Route::get('change_status/sales/{sale}', 'SaleController@change_status')->name('
 
 Route::resource('users', 'UserController')->names('users');
 
-Route::resource('roles', 'RoleController')->names('roles');
+Route::resource('roles', 'RoleController')->except(['create','store','destroy'])->names('roles');
 
 Route::get('get_products_by_barcode', 'ProductController@get_products_by_barcode')->name('get_products_by_barcode');
 
@@ -85,7 +91,7 @@ Route::get('get_subcategories', 'AjaxController@get_subcategories')->name('get_s
 
 Route::get('get_products_by_subcategory', 'AjaxController@get_products_by_subcategory')->name('get_products_by_subcategory');
 
-Route::resource('sub_categories', 'SubCategoryController')->except('edit','update','show')->names('sub_categories');
+Route::resource('sub_categories', 'SubCategoryController')->except(['edit','update','show'])->names('sub_categories');
 
 Route::get('category/{category}/sub_category/{sub_category}/edit', 'SubCategoryController@edit')->name('sub_categories.edit');
 

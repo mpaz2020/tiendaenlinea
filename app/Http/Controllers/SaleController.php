@@ -8,6 +8,7 @@ use App\Product;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Http\Requests\Sale\UpdateRequest;
 use App\Printer as Impresora;
+use App\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -21,12 +22,6 @@ class SaleController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware('can:sales.create')->only(['create','store']);
-        // $this->middleware('can:sales.index')->only(['index']);
-        // $this->middleware('can:sales.show')->only(['show']);
-        // $this->middleware('can:sales.pdf')->only(['pdf']);
-        // $this->middleware('can:sales.print')->only(['print']);
-        // $this->middleware('can:sales.change.status')->only(['change_status']);
     }
 
     public function index()
@@ -39,8 +34,8 @@ class SaleController extends Controller
 
     public function create()
     {
-        $clients = Client::get();
-        $products = Product::get();
+        $clients = User::role('Client')->get();
+        $products = Product::where('status','ACTIVE')->get();
 
         return view('admin.sale.create', compact('clients', 'products'));
     }

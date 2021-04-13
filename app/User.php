@@ -49,4 +49,11 @@ class User extends Authenticatable
     public function profile(){
         return $this->hasOne(Profile::class);
     }
+
+    // public function shoppingCarts(){
+    //     return  $this->hasMany(ShoppingCart::class);
+    // }
+    public function orders(){
+        return  $this->hasMany(Order::class);
+    }
 }

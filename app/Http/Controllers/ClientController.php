@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
+Use App\User;
 use App\Http\Requests\Client\StoreRequest;
 use App\Http\Requests\Client\UpdateRequest;
 
@@ -11,16 +11,11 @@ class ClientController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware('can:clients.create')->only(['create','store']);
-        // $this->middleware('can:clients.index')->only(['index']);
-        // $this->middleware('can:clients.edit')->only(['edit','update']);
-        // $this->middleware('can:clients.show')->only(['show']);
-        // $this->middleware('can:clients.destroy')->only(['destroy']);
     }
 
     public function index()
     {
-        $clients=Client::get();
+        $clients=User::role('Client')->get();
         return view('admin.client.index',compact('clients'));
     }
 
@@ -33,24 +28,32 @@ class ClientController extends Controller
 
     public function store(StoreRequest $request)
     {
-        Client::create($request->all());
+        User::create($request->all())->assignRole('Client');
+
+        if($request->sale===1){
+            return redirect()->back();
+        }
 
         return redirect()->route('clients.index');
     }
 
 
-    public function show(Client $client)
+    public function show(User $client)
     {
-        return view('admin.client.show', compact('client'));
+        $total_purchases=0;
+        foreach ($client->sales as $key => $sale) {
+            $total_purchases+=$sale->total;
+        }
+        return view('admin.client.show', compact('client','total_purchases'));
     }
 
 
-    public function edit(Client $client)
+    public function edit(User $client)
     {
         return view('admin.client.edit', compact('client'));
     }
 
-    public function update(UpdateRequest $request, Client $client)
+    public function update(UpdateRequest $request, User $client)
     {
         $client->update($request->all());
 
@@ -58,7 +61,7 @@ class ClientController extends Controller
     }
 
 
-    public function destroy(Client $client)
+    public function destroy(User $client)
     {
         $client->delete();
 

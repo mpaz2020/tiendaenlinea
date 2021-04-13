@@ -14,10 +14,11 @@ class DatabaseSeeder extends Seeder
 
         //$this->call(PermissionsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-
-
         $this->call(BusinessTableSeeder::class);
         $this->call(PrinterTableSeeder::class);
+        $this->call(CurrencySeeder::class);
+        $this->call(PaymentPlatformSeeder::class);
+
 
         factory(App\Tag::class,10)->create();
         factory(App\Category::class,10)->create();

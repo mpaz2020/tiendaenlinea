@@ -3,31 +3,41 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class ShoppingCart extends Model
 {
-    protected $fillable = [
-        'status',
-        'user_id',
-        'order_date'
-    ];
+    // protected $fillable = [
+    //     'status',
+    //     'user_id',
+    //     'order_date'
+    // ];
 
     public function shopping_cart_details()
     {
         return $this->hasMany(ShoppingCartDetail::class);
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 
     public static function findOrCreateBySessionId($shopping_cart_id){
         if (self::find($shopping_cart_id)) {
             return self::find($shopping_cart_id);
         }else{
             return self::create();
+        }
+    }
+
+    public static function findOrCreateByUserId($user){
+        $active=$user->shoppingCarts->where('status','ACTIVE')->first();
+        if ($active) {
+            return $active;
+        }else{
+            return self::create(['user_id'=>auth()->user()->id]);
         }
     }
 
@@ -46,6 +56,11 @@ class ShoppingCart extends Model
         $session_name = 'shopping_cart_id';
         $shopping_cart_id = Session::get($session_name);
         $shopping_cart = self::findOrCreateBySessionId($shopping_cart_id);
+        return $shopping_cart;
+    }
+
+    public static function get_the_user_shopping_cart(){
+        $shopping_cart = self::findOrCreateByUserId(Auth::user());
         return $shopping_cart;
     }
 

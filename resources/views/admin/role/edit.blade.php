@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Editar rol')
+@section('title', 'Editar permisos del rol '.$role->name)
 
 @section('styles')
 @endsection
@@ -15,13 +15,13 @@
     <div class="content-wrapper">
         <div class="page-header">
             <h3 class="page-title">
-                Editar rol
+                Editar permisos del rol {{$role->name}}
             </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Panel Administrador</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Rols</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Editar rol</li>
+                    <li class="breadcrumb-item active" aria-current="page">Editar permisos del rol {{$role->name}}</li>
                 </ol>
             </nav>
         </div>
@@ -30,16 +30,16 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h4 class="card-title">Editar rol</h4>
+                            <h4 class="card-title">Editar permisos del rol {{$role->name}}</h4>
                         </div>
                         {!! Form::model($role,['route' => ['roles.update',$role], 'method' => 'PUT']) !!}
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="name">Nombre</label>
                             <input id="name" class="form-control" type="text" name="name" value="{{$role->name}}" placeholder="Nombre">
-                        </div>
+                        </div> --}}
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="slug">Slug</label>
                             <input id="slug" class="form-control" type="text" name="slug" value="{{$role->slug}}" placeholder="Nombre">
                         </div>
@@ -47,7 +47,7 @@
                         <div class="form-group">
                             <label for="description">Descripcion</label>
                             <textarea id="description" class="form-control" name="description" rows="3">{{$role->description}}</textarea>
-                        </div>
+                        </div> --}}
 
                         <h3>Permisos especiales</h3>
 

@@ -21,7 +21,7 @@ class CreateShoppingCartDetailsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
 
-            $table->decimal('price');
+            //$table->decimal('price');
             $table->integer('quantity')->default(1);
 
             $table->timestamps();

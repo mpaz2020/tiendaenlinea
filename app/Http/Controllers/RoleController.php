@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Caffeinated\Shinobi\Models\Permission;
+//use Caffeinated\Shinobi\Models\Permission;
+//use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
-use Caffeinated\Shinobi\Models\Role;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 
 class RoleController extends Controller
 {
@@ -13,11 +16,6 @@ class RoleController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware('can:roles.create')->only(['create','store']);
-        // $this->middleware('can:roles.index')->only(['index']);
-        // $this->middleware('can:roles.edit')->only(['edit','update']);
-        // $this->middleware('can:roles.show')->only(['show']);
-        // $this->middleware('can:roles.destroy')->only(['destroy']);
     }
 
     public function index()
@@ -26,19 +24,19 @@ class RoleController extends Controller
         return view('admin.role.index',compact('roles'));
     }
 
-    public function create()
-    {
-        $permissions=Permission::get();
-        return view('admin.role.create',compact('permissions'));
-    }
+    // public function create()
+    // {
+    //     $permissions=Permission::get();
+    //     return view('admin.role.create',compact('permissions'));
+    // }
 
 
-    public function store(Request $request)
-    {
-        $role=Role::create($request->all());
-        $role->permissions()->sync($request->get('permissions'));
-        return redirect()->route('roles.index');
-    }
+    // public function store(Request $request)
+    // {
+    //     $role=Role::create($request->all());
+    //     $role->permissions()->sync($request->get('permissions'));
+    //     return redirect()->route('roles.index');
+    // }
 
 
     public function show(Role $role)
@@ -63,9 +61,9 @@ class RoleController extends Controller
         return redirect()->route('roles.index');
     }
 
-    public function destroy(Role $role)
-    {
-        $role->delete();
-        return back();
-    }
+    // public function destroy(Role $role)
+    // {
+    //     $role->delete();
+    //     return back();
+    // }
 }

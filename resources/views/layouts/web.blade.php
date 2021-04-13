@@ -116,9 +116,9 @@
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="myaccount">
-                                                    <a class="dropdown-item" href="my-account.html">my account</a>
-                                                    <a class="dropdown-item" href="login-register.html"> login</a>
-                                                    <a class="dropdown-item" href="login-register.html">register</a>
+                                                    <a class="dropdown-item" href="{{route('web.my_account')}}">my account</a>
+                                                    <a class="dropdown-item" href="{{route('web.login_register')}}"> login</a>
+                                                    <a class="dropdown-item" href="{{route('web.login_register')}}">register</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -129,7 +129,7 @@
                                             <a href="{{route('web.cart')}}">my cart</a>
                                         </li>
                                         <li>
-                                            <a href="#">checkout</a>
+                                            <a href="{{route('web.checkout')}}">checkout</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -342,8 +342,8 @@
                                                     </li>
                                                     <li class="mega-title"><a href="#">column 03</a>
                                                         <ul>
-                                                            <li><a href="cart.html">cart</a></li>
-                                                            <li><a href="checkout.html">checkout</a></li>
+                                                            <li><a href="{{route('web.cart')}}">cart</a></li>
+                                                            <li><a href="{{route('web.checkout')}}">checkout</a></li>
                                                             <li><a href="compare.html">compare</a></li>
                                                             <li><a href="wishlist.html">wishlist</a></li>
                                                         </ul>
@@ -489,9 +489,9 @@
                                 </div>
                                 <div class="widget-body">
                                     <ul>
-                                        <li><a href="#">my account</a></li>
-                                        <li><a href="#">my cart</a></li>
-                                        <li><a href="#">checkout</a></li>
+                                        <li><a href="{{route('web.my_account')}}">my account</a></li>
+                                        <li><a href="{{route('web.cart')}}">my cart</a></li>
+                                        <li><a href="{{route('web.checkout')}}"></a></li>
                                         <li><a href="#">my wishlist</a></li>
                                         <li><a href="#">login</a></li>
                                     </ul>

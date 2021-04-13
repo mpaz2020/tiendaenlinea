@@ -350,77 +350,102 @@
                                         </tr>
                                         <tr>
                                             <td>Total Amount</td>
-                                            <td><strong>$470</strong></td>
+                                            <td><strong>S/. {{ $shopping_cart->total_price() }}</strong></td>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
                             <!-- Order Payment Method -->
-                            <div class="order-payment-method">
-                                <div class="single-payment-method show">
-                                    <div class="payment-method-name">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="cashon" name="paymentmethod" value="cash"
-                                                class="custom-control-input" checked />
-                                            <label class="custom-control-label" for="cashon">Cash On Delivery</label>
+                            <form action="{{route('web.pay')}}" method="POST">
+                                @csrf
+                                <div class="order-payment-method">
+
+                                    {{-- <div class="single-payment-method show">
+                                        <div class="payment-method-name">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="cashon" name="paymentmethod" value="cash"
+                                                    class="custom-control-input" checked />
+                                                <label class="custom-control-label" for="cashon">Cash On Delivery</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="payment-method-details" data-method="cash">
-                                        <p>Pay with cash upon delivery.</p>
-                                    </div>
-                                </div>
-                                <div class="single-payment-method">
-                                    <div class="payment-method-name">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="directbank" name="paymentmethod" value="bank"
+                                        <div class="payment-method-details" data-method="cash">
+                                            <p>Pay with cash upon delivery.</p>
+                                        </div>
+                                    </div> --}}
+                                    {{-- <div class="single-payment-method">
+                                        <div class="payment-method-name">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="directbank"
+                                                name="paymentmethod"
+                                                value="bank"
                                                 class="custom-control-input" />
-                                            <label class="custom-control-label" for="directbank">Direct Bank
-                                                Transfer</label>
+                                                <label class="custom-control-label"
+                                                for="directbank">Direct Bank
+                                                    Transfer</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="payment-method-details" data-method="bank">
-                                        <p>Make your payment directly into our bank account. Please use your Order ID as the
-                                            payment reference. Your order will not be shipped until the funds have cleared
-                                            in our account..</p>
-                                    </div>
-                                </div>
-                                <div class="single-payment-method">
-                                    <div class="payment-method-name">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="checkpayment" name="paymentmethod" value="check"
-                                                class="custom-control-input" />
-                                            <label class="custom-control-label" for="checkpayment">Pay with Check</label>
+                                        <div class="payment-method-details" data-method="bank">
+                                            <p>Make your payment directly into our bank account. Please use your Order
+                                                ID as
+                                                the
+                                                payment reference. Your order will not be shipped until the funds have
+                                                cleared
+                                                in our account..</p>
                                         </div>
-                                    </div>
-                                    <div class="payment-method-details" data-method="check">
-                                        <p>Please send a check to Store Name, Store Street, Store Town, Store State /
-                                            County, Store Postcode.</p>
-                                    </div>
-                                </div>
-                                <div class="single-payment-method">
-                                    <div class="payment-method-name">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="paypalpayment" name="paymentmethod" value="paypal"
-                                                class="custom-control-input" />
-                                            <label class="custom-control-label" for="paypalpayment">Paypal <img
-                                                    src="assets/img/paypal-card.jpg" class="img-fluid paypal-card"
-                                                    alt="Paypal" /></label>
+                                    </div> --}}
+                                    @foreach ($paymentsPlatforms as $paymentPlatform)
+
+                                        <div class="single-payment-method">
+                                            <div class="payment-method-name">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio"
+                                                    id="{{$paymentPlatform->name}}payment"
+                                                    name="payment_platform"
+                                                    value="{{$paymentPlatform->id}}"
+                                                    class="custom-control-input"  required/>
+                                                    <label class="custom-control-label" for="{{$paymentPlatform->name}}payment">{{$paymentPlatform->name}}
+                                                        <img
+                                                            src="galio/assets/img/paypal-card.jpg" class="img-fluid paypal-card"
+                                                            alt="Paypal" /></label>
+                                                </div>
+                                            </div>
+                                            <div class="payment-method-details" data-method="{{$paymentPlatform->name}}">
+                                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a
+                                                    PayPal
+                                                    account.</p>
+                                            </div>
                                         </div>
+
+                                    @endforeach
+                                    {{-- <div class="single-payment-method">
+                                        <div class="payment-method-name">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="checkpayment" name="paymentmethod" value="check"
+                                                    class="custom-control-input" />
+                                                <label class="custom-control-label" for="checkpayment">Pay with
+                                                    Check</label>
+                                            </div>
+                                        </div>
+                                        <div class="payment-method-details" data-method="check">
+                                            <p>Please send a check to Store Name, Store Street, Store Town, Store State /
+                                                County, Store Postcode.</p>
+                                        </div>
+                                    </div> --}}
+
+
+
+                                    <div class="summary-footer-area">
+                                        <div class="custom-control custom-checkbox mb-14">
+                                            <input type="checkbox" class="custom-control-input" id="terms" required />
+                                            <label class="custom-control-label" for="terms">I have read and agree to the
+                                                website
+                                                <a href="index.html">terms and conditions.</a></label>
+                                        </div>
+                                        <button type="submit" class="check-btn sqr-btn">Place Order</button>
                                     </div>
-                                    <div class="payment-method-details" data-method="paypal">
-                                        <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
-                                            account.</p>
-                                    </div>
+
                                 </div>
-                                <div class="summary-footer-area">
-                                    <div class="custom-control custom-checkbox mb-14">
-                                        <input type="checkbox" class="custom-control-input" id="terms" required />
-                                        <label class="custom-control-label" for="terms">I have read and agree to the website
-                                            <a href="index.html">terms and conditions.</a></label>
-                                    </div>
-                                    <button type="submit" class="check-btn sqr-btn">Place Order</button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

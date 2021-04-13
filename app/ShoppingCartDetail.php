@@ -11,7 +11,7 @@ class ShoppingCartDetail extends Model
         'shopping_cart_id',
         'product_id',
         'quantity',
-        'price',
+        //'price',
     ];
 
     // public function shopping_cart()

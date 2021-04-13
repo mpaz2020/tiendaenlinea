@@ -42,7 +42,7 @@
             <span class="subtotal-price">S/. {{$shopping_cart->total_price()}}</span>
         </li>
         <li class="checkout-btn">
-            <a href="#">checkout</a>
+            <a href="{{route('web.checkout')}}">checkout</a>
         </li>
     </ul>
 </div>

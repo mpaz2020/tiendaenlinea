@@ -24,7 +24,7 @@
 
       {{-- menu --}}
 
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="{{route('categories.index')}}">
           <i class="fa fa-tag menu-icon"></i>
           <span class="menu-title">Categorias</span>
@@ -35,19 +35,50 @@
           <i class="fa fa-tags menu-icon"></i>
           <span class="menu-title">Etiquetas</span>
         </a>
-      </li>
+      </li> --}}
       <li class="nav-item">
         <a class="nav-link" href="{{route('clients.index')}}">
           <i class="fas fa-users menu-icon"></i>
           <span class="menu-title">Clientes</span>
         </a>
       </li>
+
       <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#inventario" aria-expanded="false" aria-controls="inventario">
+          <i class="fa fa-boxes menu-icon"></i>
+          <span class="menu-title">Inventario</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="inventario">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item d-none d-lg-block">
+                <a class="nav-link" href="{{route('products.index')}}">Productos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('categories.index')}}">Categorias</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('tags.index')}}">Etiquetas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Marcas</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+
+
+
+
+
+      {{-- <li class="nav-item">
         <a class="nav-link" href="{{route('products.index')}}">
           <i class="fa fa-boxes menu-icon"></i>
           <span class="menu-title">Productos</span>
         </a>
-      </li>
+      </li> --}}
+
       <li class="nav-item">
         <a class="nav-link" href="{{route('providers.index')}}">
           <i class="fa fa-truck menu-icon"></i>

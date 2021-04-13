@@ -22,10 +22,6 @@ class WebController extends Controller
         return view('web.product-details',compact('product'));
     }
 
-    public function my_account() {
-        return view('web.my-account');
-    }
-
     public function login_register() {
         return view('web.login-register');
     }
@@ -48,9 +44,5 @@ class WebController extends Controller
 
     public function about_us() {
         return view('web.about-us');
-    }
-
-    public function checkout() {
-        return view('web.checkout');
     }
 }

@@ -16,10 +16,10 @@ class CreateShoppingCartsTable extends Migration
         Schema::create('shopping_carts', function (Blueprint $table) {
             $table->id();
 
-            $table->enum('status',['ACTIVE','PENDING','APPROVED','FINISHED'])->default('ACTIVE');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamp('order_date')->nullable();
+            // $table->enum('status',['ACTIVE','PENDING','APPROVED','FINISHED'])->default('ACTIVE');
+            // $table->unsignedBigInteger('user_id')->nullable();
+            // $table->foreign('user_id')->references('id')->on('users');
+            // $table->timestamp('order_date')->nullable();
 
             $table->timestamps();
         });
