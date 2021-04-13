@@ -37,5 +37,33 @@ return [
         'class'=>App\Services\PayPalService::class,
     ],
 
+    'mercadopago' => [
+        'base_uri' => env('MERCADOPAGO_BASE_URI'),
+        'key' => env('MERCADOPAGO_KEY'),
+        'secret' => env('MERCADOPAGO_SECRET'),
+        'base_currency' => 'cop',
+        'class' => App\Services\MercadoPagoService::class,
+    ],
+
+    'payu' => [
+        'base_uri' => env('PAYU_BASE_URI'),
+        'account_id' => env('PAYU_BASE_ACCOUNT_ID'),
+        'merchant_id' => env('PAYU_BASE_MERCHANT_ID'),
+        'key' => env('PAYU_KEY'),
+        'secret' => env('PAYU_SECRET'),
+        'base_currency' => 'cop',
+        'class' => App\Services\PayUService::class,
+    ],
+
+    'stripe' => [
+        'base_uri' => env('STRIPE_BASE_URI'),
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'class' => App\Services\StripeService::class,
+        'plans' => [
+            'monthly' => env('STRIPE_MONTHLY_PLAN'),
+            'yearly' => env('STRIPE_YEARLY_PLAN'),
+        ],
+    ],
 
 ];
