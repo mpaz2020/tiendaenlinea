@@ -66,15 +66,15 @@
                                                 <p align="right">SUBTOTAL: </p>
                                             </th>
                                             <th>
-                                                <p align="right">{{number_format($subtotal,2)}}</p>
+                                                <p align="right">{{number_format($order->subtotal(),2)}}</p>
                                             </th>
                                         </tr>
                                         <tr>
                                             <th colspan="4">
-                                                <p align="right">TOTAL IMPUESTO ({{$sale->tax}}%):</p>
+                                                <p align="right">TOTAL IMPUESTO ({{$order->tax}}%):</p>
                                             </th>
                                             <th>
-                                                <p align="right">{{number_format($subtotal * $sale->tax/100,2)}}</p>
+                                                <p align="right">{{number_format($order->total_tax(),2)}}</p>
                                             </th>
                                         </tr>
                                         <tr>
@@ -82,18 +82,18 @@
                                                 <p align="right">TOTAL:</p>
                                             </th>
                                             <th>
-                                                <p align="right">{{number_format($sale->total,2)}}</p>
+                                                <p align="right">{{number_format($order->total(),2)}}</p>
                                             </th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach ($saleDetails as $saleDetail)
+                                        @foreach ($order->order_details as $order_detail)
                                             <tr>
-                                                <td>{{$saleDetail->product->name}}</td>
-                                                <td>{{$saleDetail->price}}</td>
-                                                <td>{{$saleDetail->discount}}</td>
-                                                <td>{{$saleDetail->quantity}}</td>
-                                                <td>{{number_format($saleDetail->quantity * $saleDetail->price-$saleDetail->quantity * $saleDetail->price*$saleDetail->discount/100,2)}}</td>
+                                                <td>{{$order_detail->product->name}}</td>
+                                                <td>{{$order_detail->price}}</td>
+                                                <td>{{$order_detail->discount}}</td>
+                                                <td>{{$order_detail->quantity}}</td>
+                                                <td>{{number_format($order_detail->total())}}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="card-footer text-muted">
-                        <a href="{{ route('sales.index') }}" type="button"
+                        <a href="{{ route('orders.index') }}" type="button"
                             class="btn btn-primary float-right">Regresar</a>
                     </div>
                 </div>

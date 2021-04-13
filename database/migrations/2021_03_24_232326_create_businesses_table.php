@@ -19,10 +19,10 @@ class CreateBusinessesTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('logo');
-            $table->string('mail');
+            $table->string('email');
             $table->string('address');
             $table->string('ruc');
-
+            $table->string('phone');
             $table->timestamps();
         });
     }

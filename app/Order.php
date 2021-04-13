@@ -37,8 +37,12 @@ class Order extends Model
         return $total;
     }
 
-    public function total(){
+    public function total_tax(){
         return $this->subtotal()*$this->tax;
+    }
+
+    public function total(){
+        return $this->subtotal()+ $this->total_tax();
     }
 
     public static function my_store()

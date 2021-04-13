@@ -19,7 +19,7 @@ class CreateProfilesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->string('first_name')->nullable();
+            //$table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             //$table->string('display_name');
             $table->string('dni')->nullable()->unique();

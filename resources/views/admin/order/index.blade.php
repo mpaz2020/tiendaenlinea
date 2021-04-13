@@ -68,11 +68,17 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($orders as $key=> $order)
+                                    @foreach ($orders as $key => $order)
                                         <tr>
                                             <th scope="row">{{ $order->id }}</th>
                                             <td>{{ $order->order_date }}</td>
-                                            <td>{{ $order->shipping_status }}</td>
+                                            <td>
+                                                <a href="#" id="username" data-type="select" data-pk="{{ $order->id }}"
+                                                    data-url="{{ url("/orders/$order->id") }}" data-title="Estado"
+                                                    data-value="{{ $order->shipping_status }}">
+                                                    {{ $order->shipping_status }}
+                                                </a>
+                                            </td>
                                             <td>{{ $order->total() }}</td>
                                             <td style="width: 50px;">
                                                 <a class="jsgrid-button jsgrid-edit-button"
@@ -95,5 +101,19 @@
 @section('scripts')
 
     {!! Html::script('melody/js/data-table.js') !!}
+
+    {!! Html::script('jqueryui-editable/js/jqueryui-editable.min.js') !!}
+
+    <script>
+        $.fn.editable.defaults.mode = 'inline';
+        $.fn.editable.defaults.ajaxOptions = {
+            type: "PUT"
+        };
+
+        $(document).ready(function() {
+            $('#username').editable();
+        });
+
+    </script>
 
 @endsection
