@@ -13,7 +13,9 @@ class MyAccountController extends Controller
     }
 
     public function my_account() {
-        return view('web.my-account');
+        $orders=auth()->user()->orders;
+
+        return view('web.my-account', compact('orders'));
     }
 
     public function checkout() {

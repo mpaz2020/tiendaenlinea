@@ -41,6 +41,8 @@ Route::post('shopping_cart/update', 'ShoppingCartController@update')->name('shop
 
 //==========================================fin========================================================
 
+Route::resource('orders', 'OrderController')->only(['index','show'])->names('orders');
+
 Route::get('sales/reports_day', 'ReportController@reports_day')->name('reports.day');
 
 Route::get('sales/reports_date', 'ReportController@reports_date')->name('reports.date');

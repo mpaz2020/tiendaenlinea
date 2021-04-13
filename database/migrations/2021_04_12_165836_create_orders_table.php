@@ -22,10 +22,10 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamp('order_date')->nullable();
 
-            $table->string('code');
+            //$table->string('code');
             $table->decimal('subtotal');
             $table->decimal('tax');
-            $table->decimal('total');
+            //$table->decimal('total');
 
             $table->timestamps();
         });

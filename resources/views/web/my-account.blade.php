@@ -74,22 +74,30 @@
                                                 <table class="table table-bordered">
                                                     <thead class="thead-light">
                                                         <tr>
-                                                            <th>Order</th>
-                                                            <th>Date</th>
-                                                            <th>Status</th>
+                                                            <th>Pedido</th>
+                                                            <th>Fecha</th>
+                                                            <th>Estado</th>
                                                             <th>Total</th>
-                                                            <th>Action</th>
+                                                            <th>Accion</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Aug 22, 2018</td>
-                                                            <td>Pending</td>
-                                                            <td>$3000</td>
-                                                            <td><a href="cart.html" class="check-btn sqr-btn ">View</a></td>
-                                                        </tr>
-                                                        <tr>
+                                                        @forelse ( $orders as $key=> $order )
+                                                            <tr>
+                                                                <td>{{ $key }}</td>
+                                                                <td>{{ $order->order_date }}</td>
+                                                                <td>{{ $order->shipping_status }}</td>
+                                                                <td>{{ $order->total() }}</td>
+                                                                <td><a href="cart.html" class="check-btn sqr-btn ">View</a>
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="5"> No hay pedidos...</td>
+                                                            </tr>
+                                                        @endforelse
+
+                                                        {{-- <tr>
                                                             <td>2</td>
                                                             <td>July 22, 2018</td>
                                                             <td>Approved</td>
@@ -102,7 +110,7 @@
                                                             <td>On Hold</td>
                                                             <td>$990</td>
                                                             <td><a href="cart.html" class="check-btn sqr-btn ">View</a></td>
-                                                        </tr>
+                                                        </tr> --}}
                                                     </tbody>
                                                 </table>
                                             </div>

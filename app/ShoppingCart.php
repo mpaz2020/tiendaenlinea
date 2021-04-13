@@ -32,14 +32,14 @@ class ShoppingCart extends Model
         }
     }
 
-    public static function findOrCreateByUserId($user){
-        $active=$user->shoppingCarts->where('status','ACTIVE')->first();
-        if ($active) {
-            return $active;
-        }else{
-            return self::create(['user_id'=>auth()->user()->id]);
-        }
-    }
+    // public static function findOrCreateByUserId($user){
+    //     $active=$user->shoppingCarts->where('status','ACTIVE')->first();
+    //     if ($active) {
+    //         return $active;
+    //     }else{
+    //         return self::create(['user_id'=>auth()->user()->id]);
+    //     }
+    // }
 
     public function quantity_of_products(){
         return $this->shopping_cart_details->sum('quantity');
@@ -48,7 +48,7 @@ class ShoppingCart extends Model
     public function total_price(){
         $total=0;
         foreach ($this->shopping_cart_details as $shopping_cart_detail) {
-           $total+=$shopping_cart_detail->price * $shopping_cart_detail->quantity;
+           $total+=$shopping_cart_detail->product->sell_price * $shopping_cart_detail->quantity;
         }
         return $total;
     }
@@ -59,10 +59,10 @@ class ShoppingCart extends Model
         return $shopping_cart;
     }
 
-    public static function get_the_user_shopping_cart(){
-        $shopping_cart = self::findOrCreateByUserId(Auth::user());
-        return $shopping_cart;
-    }
+    // public static function get_the_user_shopping_cart(){
+    //     $shopping_cart = self::findOrCreateByUserId(Auth::user());
+    //     return $shopping_cart;
+    // }
 
     public function my_store($request, $product){
         $this->shopping_cart_details()->create([
