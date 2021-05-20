@@ -80,6 +80,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ])->assignRole('Client');
 
+
+        $user->profile()->create();
+
         // $shopping_cart=ShoppingCart::get_the_session_shopping_cart();
         // $shopping_cart->update(['user_id'=>$user->id]);
 

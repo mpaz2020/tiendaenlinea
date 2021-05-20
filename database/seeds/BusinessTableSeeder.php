@@ -12,9 +12,10 @@ class BusinessTableSeeder extends Seeder
             'name' => 'TGI INGENIERIA EIRL',
             'description' => 'Automatizacion industrial',
             'logo' => 'logo.png',
-            'mail' => 'ejemplo@gmail.com',
+            'email' => 'ejemplo@gmail.com',
             'address' => '553 av. A Piura',
             'ruc' => '12345678910',
+            'phone' => '1234567',
         ]);
     }
 }

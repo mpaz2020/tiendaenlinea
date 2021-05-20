@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 
 //==========================================rutas del cliente==========================================
-Route::post('/payments/pay', 'PaymentController@pay')->name('web.pay');
+Route::post('/payments/pay', 'PaymentController@pay')->name('pay');
+Route::post('/payments/approval', 'PaymentController@approval')->name('approval');
+Route::post('/payments/cancelled', 'PaymentController@cancelled')->name('cancelled');
 
 Route::get('shop_grid', 'WebController@shop_grid')->name('web.shop_grid');
 //Route::get('product_details', 'WebController@product_details')->name('web.product_details');
@@ -20,6 +22,8 @@ Route::get('about_us', 'WebController@about_us')->name('web.about_us');
 
 Route::get('my_account', 'MyAccountController@my_account')->name('web.my_account');
 Route::get('checkout', 'MyAccountController@checkout')->name('web.checkout');
+Route::get('orders2', 'MyAccountController@orders')->name('web.orders');
+Route::get('account_info', 'MyAccountController@account_info')->name('web.account_info');
 
 
 Route::get('/', 'WebController@welcome')->name('web.welcome');
@@ -42,6 +46,8 @@ Route::post('shopping_cart/update', 'ShoppingCartController@update')->name('shop
 //==========================================fin========================================================
 
 Route::resource('orders', 'OrderController')->only(['index','show'])->names('orders');
+
+Route::put('orders_update/{id}', 'OrderController@orders_update')->name('orders_update');
 
 Route::get('sales/reports_day', 'ReportController@reports_day')->name('reports.day');
 
@@ -67,7 +73,7 @@ Route::get('sales/print/{sale}', 'SaleController@print')->name('sales.print');
 
 Route::resource('printers', 'PrinterController')->only(['index','update'])->names('printers');
 
-Route::resource('business', 'BusinessController')->only(['index','update'])->names('business');
+// Route::resource('business', 'BusinessController')->only(['index','update'])->names('business');
 
 Route::get('purchases/upload/{purchase}', 'PurchaseController@upload')->name('purchases.upload');
 

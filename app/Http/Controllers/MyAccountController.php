@@ -13,14 +13,27 @@ class MyAccountController extends Controller
     }
 
     public function my_account() {
-        $orders=auth()->user()->orders;
-
-        return view('web.my-account', compact('orders'));
+        return view('web.my_account');
     }
 
     public function checkout() {
         $paymentsPlatforms=PaymentPlatform::all();
         return view('web.checkout',compact('paymentsPlatforms'));
     }
+
+    public function orders() {
+
+        $orders=auth()->user()->orders;
+
+        return view('web.orders', compact('orders'));
+    }
+
+    public function account_info() {
+
+        $user=auth()->user();
+
+        return view('web.account_info', compact('user'));
+    }
+
 
 }

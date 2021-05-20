@@ -356,7 +356,7 @@
                                 </table>
                             </div>
                             <!-- Order Payment Method -->
-                            <form action="{{route('web.pay')}}" method="POST">
+                            <form action="{{route('pay')}}" method="POST">
                                 @csrf
                                 <div class="order-payment-method">
 

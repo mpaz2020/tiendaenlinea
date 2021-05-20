@@ -22,7 +22,7 @@
             </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">Panel Administrador</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Panel Administrador</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('orders.index') }}">Pedidos</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Detalles de pedido</li>
                 </ol>
@@ -32,18 +32,31 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="form-group row">
-                            <div class="col-md-4 text-center">
-                                <label for="nombre" class="form-control-label">Cliente</label>
-                                <p><a href="{{route('clients.show',$sale->client)}}">{{$sale->client->name}}</a></p>
+                        <div class="row invoice-info">
+                            <div class="col-sm-4 invoice-col">
+                                De
+                                <address>
+                                    <strong>{{ $bussines->name }}</strong>
+                                    {{ $bussines->address }} <br>
+                                    Teléfono: {{ $bussines->phone }} <br>
+                                    Correo electrónico: {{ $bussines->email }}
+                                </address>
                             </div>
-                            <div class="col-md-4 text-center">
-                                <label for="nombre" class="form-control-label">Vendedor</label>
-                                <p>{{ $sale->user->name }}</p>
+                            <div class="col-sm-4 invoice-col">
+                                A
+                                <address>
+                                    <strong>{{$order->user->name}}
+                                    {{$order->user->profile->last_name}}</strong> <br>
+                                    {{$order->user->profile->address}} <br>
+                                    Telefono: {{$order->user->profile->phone}}<br>
+                                    Correo electronico: {{$order->user->profile->email}}
+                                </address>
                             </div>
-                            <div class="col-md-4 text-center">
-                                <label for="nombre" class="form-control-label">Número de pedido</label>
-                                <p>{{ $sale->id }}</p>
+                            <div class="col-sm-4 invoice-col">
+                                <br>
+                                <b>ID Pedido: </b>{{$order->code}}<br>
+                                <b>Fecha de pago: </b>{{$order->payment_status}}<br>
+                                <b>Fecha de pedido: </b>{{$order->order_date}}
                             </div>
                         </div>
                         <br /><br />
@@ -66,15 +79,15 @@
                                                 <p align="right">SUBTOTAL: </p>
                                             </th>
                                             <th>
-                                                <p align="right">{{number_format($order->subtotal(),2)}}</p>
+                                                <p align="right">{{ number_format($order->subtotal(), 2) }}</p>
                                             </th>
                                         </tr>
                                         <tr>
                                             <th colspan="4">
-                                                <p align="right">TOTAL IMPUESTO ({{$order->tax}}%):</p>
+                                                <p align="right">TOTAL IMPUESTO ({{ $order->tax }}%):</p>
                                             </th>
                                             <th>
-                                                <p align="right">{{number_format($order->total_tax(),2)}}</p>
+                                                <p align="right">{{ number_format($order->total_tax(), 2) }}</p>
                                             </th>
                                         </tr>
                                         <tr>
@@ -82,18 +95,18 @@
                                                 <p align="right">TOTAL:</p>
                                             </th>
                                             <th>
-                                                <p align="right">{{number_format($order->total(),2)}}</p>
+                                                <p align="right">{{ number_format($order->total(), 2) }}</p>
                                             </th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         @foreach ($order->order_details as $order_detail)
                                             <tr>
-                                                <td>{{$order_detail->product->name}}</td>
-                                                <td>{{$order_detail->price}}</td>
-                                                <td>{{$order_detail->discount}}</td>
-                                                <td>{{$order_detail->quantity}}</td>
-                                                <td>{{number_format($order_detail->total())}}</td>
+                                                <td>{{ $order_detail->product->name }}</td>
+                                                <td>{{ $order_detail->price }}</td>
+                                                <td>{{ $order_detail->discount }}</td>
+                                                <td>{{ $order_detail->quantity }}</td>
+                                                <td>{{ number_format($order_detail->total(), 2) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

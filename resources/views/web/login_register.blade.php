@@ -68,12 +68,24 @@
                             {{-- <form action="#" method="post" action="{{route('web.login_register')}}"> --}}
                             <form method="POST" action="{{ route('register') }}">
                             @csrf
-                                <div class="single-input-item">
-                                    <input type="text" id="name" name="name" placeholder="Nombre completo" required />
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="single-input-item">
+                                        <input type="text" id="name" name="name" placeholder="Nombre" required />
+                                    </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="single-input-item">
+                                        <input type="text" id="surnames" name="surnames" placeholder="Apellidos" required />
+                                    </div>
+                                </div>
+                            </div>
+
+
                                 <div class="single-input-item">
                                     <input type="email" id="email" name="email" placeholder="Ingresa tu e-mail" required />
                                 </div>
+
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="single-input-item">

@@ -73,10 +73,11 @@
                                             <th scope="row">{{ $order->id }}</th>
                                             <td>{{ $order->order_date }}</td>
                                             <td>
-                                                <a href="#" id="username" data-type="select" data-pk="{{ $order->id }}"
-                                                    data-url="{{ url("/orders/$order->id") }}" data-title="Estado"
+                                                <a href="#" class="edit" id="username" data-type="select"
+                                                    data-pk="{{ $order->id }}"
+                                                    data-url="{{ url("/orders_update/$order->id") }}" data-title="Estado"
                                                     data-value="{{ $order->shipping_status }}">
-                                                    {{ $order->shipping_status }}
+                                                    {{ $order->shipping_status() }}
                                                 </a>
                                             </td>
                                             <td>{{ $order->total() }}</td>
@@ -111,7 +112,26 @@
         };
 
         $(document).ready(function() {
-            $('#username').editable();
+            $('.edit').editable({
+                source: [{
+                        value: 'PENDING',
+                        text: 'PENDIENTE'
+                    },
+                    {
+                        value: 'APPROVED',
+                        text: 'APROBADO'
+                    },
+                    {
+                        value: 'CANCELED',
+                        text: 'CANCELADO'
+                    },
+                    {
+                        value: 'DELIVERED',
+                        text: 'ENTREGADO'
+                    }
+                ]
+            });
+
         });
 
     </script>

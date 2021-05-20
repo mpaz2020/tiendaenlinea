@@ -31,18 +31,20 @@ class Order extends Model
     public function subtotal()
     {
         $total = 0;
-        foreach ($this->order_details() as $key => $order_detail) {
+        foreach ($this->order_details as $key => $order_detail) {
             $total += $order_detail->total();
         }
         return $total;
     }
 
-    public function total_tax(){
-        return $this->subtotal()*$this->tax;
+    public function total_tax()
+    {
+        return $this->subtotal() * $this->tax;
     }
 
-    public function total(){
-        return $this->subtotal()+ $this->total_tax();
+    public function total()
+    {
+        return $this->subtotal() + $this->total_tax();
     }
 
     public static function my_store()
@@ -59,8 +61,23 @@ class Order extends Model
             'tax' => 0.18,
         ]);
         foreach ($shopping_cart->shopping_cart_details as $key => $shopping_cart_detail) {
-            $results[]=array("product_id"=>$shopping_cart_detail->product_id[$key], "quantity"=>$shopping_cart_detail->quantity[$key],"price"=>$shopping_cart_detail->price[$key]);
+            $results[] = array("product_id" => $shopping_cart_detail->product_id, "quantity" => $shopping_cart_detail->quantity, "price" => $shopping_cart_detail->product->sell_price);
         }
         $order->order_details()->createMany($results);
+    }
+
+
+    public function shipping_status()
+    {
+        switch ($this->shipping_status) {
+            case 'PENDING':
+                return 'PENDIENTE';
+            case 'APPROVED':
+                return 'APROBADO';
+            case 'CANCELED':
+                return 'CANCELADO';
+            case 'DELIVERED':
+                return 'ENTREGADO';
+        }
     }
 }

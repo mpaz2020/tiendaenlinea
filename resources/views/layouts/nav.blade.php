@@ -92,6 +92,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{route('orders.index')}}">
+            <i class="fab fa-first-order menu-icon"></i>
+          <span class="menu-title">Pedidos</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{{route('sales.index')}}">
           <i class="fa fa-shopping-cart menu-icon"></i>
           <span class="menu-title">Ventas</span>

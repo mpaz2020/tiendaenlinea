@@ -14,20 +14,20 @@ class WebController extends Controller
 
         $products=Product::get_active_products()->paginate(12);
 
-        return view('web.shop-grid', compact('products'));
+        return view('web.shop_grid', compact('products'));
     }
 
     public function product_details(Product $product) {
 
-        return view('web.product-details',compact('product'));
+        return view('web.product_details',compact('product'));
     }
 
     public function login_register() {
-        return view('web.login-register');
+        return view('web.login_register');
     }
 
     public function contact_us() {
-        return view('web.contact-us');
+        return view('web.contact_us');
     }
 
     public function cart() {
@@ -39,10 +39,10 @@ class WebController extends Controller
     }
 
     public function blog_details () {
-        return view('web.blog-details');
+        return view('web.blog_details');
     }
 
     public function about_us() {
-        return view('web.about-us');
+        return view('web.about_us');
     }
 }
